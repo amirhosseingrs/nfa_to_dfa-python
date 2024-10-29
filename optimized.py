@@ -1,12 +1,25 @@
 # Declare variables
 last_state = 10
 DTrans = dict()
-
-states = {
-    'q0': ['1', '3'], 'q1': ['a2'], 'q2': ['5'], 'q3': ['b4'], 'q4': ['5'],
-    'q5': ['6', '8'], 'q6': ['a7'], 'q7': ['10'], 'q8': ['b9'], 'q9': ['10'], 'q10': []
-}
+# states = {
+#     'q0': ['1', '3'], 'q1': ['a2'], 'q2': ['5'], 'q3': ['b4'], 'q4': ['5'],
+#     'q5': ['6', '8'], 'q6': ['a7'], 'q7': ['10'], 'q8': ['b9'], 'q9': ['10'], 'q10': []
+# }
 DT_names = list('BCDEFGHIJKLMNOPQRSTUVWXYZ')[::-1]
+
+
+states = dict()
+for i in range(100) :
+    # Input Format : 1,a2,b3,4 
+    state = input(f'q{i}: ').split(",")
+
+    if 'end' in state :
+        last_state = len(states)
+        break
+    if state == [''] : 
+        state = list()
+
+    states[f'q{i}'] = state
 
 # Declare Functions
 def ep(s):
@@ -46,10 +59,6 @@ def add_DTrans(name, value, marked, ecm_a, ecm_b, final):
 
 def check_Dtrans(value):
     return next((key for key, info in DTrans.items() if info['value'] == value), None)
-
-# Union function to combine sets
-def union(a, b):
-    return a | b
 
 # Start Algorithm
 # First Step: Finding epsilon_closure(First-State) -> DTrans['A']
