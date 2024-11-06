@@ -14,7 +14,7 @@ for i in range(100) :
     state = input(f'q{i}: ').split(",")
 
     if 'end' in state :
-        last_state = len(states)
+        last_state = len(states) - 1
         break
     if state == [''] : 
         state = list()
@@ -91,3 +91,4 @@ for i in DTrans:
     ecm_b = DTrans[i]['ecm_b']
     print(f"{i}---(a)--->{ecm_a}")
     print(f"{i}---(b)--->{ecm_b}")
+print(f'final state/states : {[key for key, info in DTrans.items() if info["final"] == True]}')
